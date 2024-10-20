@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}" href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-4">
+    <h1 class="mb-4">TODO 할 일 등록</h1>
+
+    <div>
+        <table class="table table-bordered table-hover">
+            <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>제목</th>
+                <th>설명</th>
+                <th>상태</th>
+                <th>카테고리</th>
+                <th>우선순위</th>
+                <th>등록일</th>
+                <th>수정일</th>
+                <th>비고</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="task : ${tasks}">
+                <td>
+                    <a th:href="@{/todos/{itemId}(itemId=${task.id})}" th:text="${task.id}"></a>
+                </td>
+                <td>
+                    <a th:href="@{/todos/{itemId}(itemId=${task.id})}" th:text="${task.title}"></a>
+                </td>
+                <td th:text="${task.description}"></td>
+                <td>
+                    <p th:if="${task.isComplete}" th:text="완료"></p>
+                    <p th:unless="${task.isComplete}" th:text="미완료"></p>
+                </td>
+                <td th:text="${task.category}"></td>
+                <td th:text="${task.priority}"></td>
+                <td th:text="${{task.postDate}}"></td>
+                <td th:text="${{task.editDate}}"></td>
+                <td>
+                    <button class="btn btn-danger" th:onclick="|if(confirm('정말 삭제하시겠습니까?')) window.location='@{/todos/{taskId}/delete(taskId=${task.id})}'|">
+                        삭제
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mt-4">
+        <button class="btn btn-primary" type="button" th:onclick="|window.location='@{/todos/save}'|">할일 등록</button>
+    </div>
+</div> <!-- /container -->
+
+</body>
+</html>
