@@ -64,7 +64,6 @@ public class TaskController {
         return "redirect:/todos";
     }
 
-
     //할 일 상세
     @GetMapping("/{taskId}")
     public String taskView(@PathVariable Long taskId, Model model) {
@@ -72,4 +71,20 @@ public class TaskController {
         model.addAttribute("task", task);
         return "todos/task";
     }
+
+    @PostMapping("/{taskId}/delete")
+    public String delete(@PathVariable Long taskId) {
+        taskMemoryRepository.remove(taskId);
+        return "redirect:/todos";
+    }
+
+
+
+
+    //TODO 할 일 수정 :  /{taskId}/edit POST, GET
+    //TODO Bean Validation 검증 추가
+    //TODO 로그인, 로그아웃, 인터셉터 추가
+    //TODO 검색 기능, 필터 기능 추가
+
+
 }

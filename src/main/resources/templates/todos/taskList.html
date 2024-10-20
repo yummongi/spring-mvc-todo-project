@@ -42,9 +42,11 @@
                 <td th:text="${{task.postDate}}"></td>
                 <td th:text="${{task.editDate}}"></td>
                 <td>
-                    <button class="btn btn-danger" th:onclick="|if(confirm('정말 삭제하시겠습니까?')) window.location='@{/todos/{taskId}/delete(taskId=${task.id})}'|">
-                        삭제
-                    </button>
+                    <form method="post" th:action="@{/todos/{taskId}/delete(taskId=${task.id})}">
+                        <button class="btn btn-danger" onclick="return confirm('정말 삭제하시겠습니까?')" type="submit">
+                            삭제
+                        </button>
+                    </form>
                 </td>
             </tr>
             </tbody>
